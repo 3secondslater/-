@@ -5,14 +5,13 @@ from colors import Colors
 class UI:
     def __init__(self):
         # 창 설정
-        self.screen = pygame.display.set_mode((500, 620))  # 게임 창 크기 설정
-        pygame.display.set_caption("Python Tetris")  # 창 제목 설정
+        self.screen = pygame.display.set_mode((500, 620))  # 게임 창 크기 설정 # 앞에  self.를 넣는 이유는 나중에 만들어진 객체를 또 사용하기 위함, 인스턴스에 보관  아래 동일
+        pygame.display.set_caption("Python Tetris")  # 창 제목 설정 # set_caption 은 두개의 인자를 받을 수 있다. (긴 제목, 짧은 제목/아이콘 제목) 여기서는 하나만 사용하였음.
 
-        # 폰트
-        self.title_font = pygame.font.SysFont("malgun gothic", 30)  # 맑은고딕 폰트, 크기 30
-
+        # 폰트맑은고딕 폰트, 크기 30
+        self.title_font = pygame.font.SysFont("malgun gothic", 30, bold=True) 
         # 변하지 않는 텍스트는 미리 렌더링하여 surface로 저장 (매 프레임 다시 만들 필요 없음)
-        self.score_surface = self.title_font.render("Score", True, Colors.white)
+        self.score_surface = self.title_font.render("Score", True, Colors.white) #Colors.white 값 읽고, 문자열Score 준비, 안티엘리어싱 true 값 준비, self.title_font 객체 찾기 찾은 값들을 모두 호출 render함수 작동해서 surface 객체를 반환. 반환된 serface를 저장.
         self.next_surface = self.title_font.render("Next", True, Colors.white)
         self.game_over_surface = self.title_font.render("GAME OVER", True, Colors.white)
 
@@ -50,7 +49,7 @@ class UI:
 
     def is_start_clicked(self, pos):
         # 클릭 좌표가 스타트 버튼 영역 안에 있는지 검사
-        return self.start_button_rect.collidepoint(pos)
+        return self.start_button_rect.collidepoint(pos) #pygame.Rect 객체의 collidepoint() 메서드는 주어진 좌표가 사각형 내부에 있는지 검사하여 True/False 반환 
 
     def draw_pause_overlay(self):
         # 게임 화면 위에 어두운 막을 덮고 "PAUSED" 텍스트를 중앙에 표시
@@ -63,7 +62,7 @@ class UI:
         self.screen.fill(Colors.dark_blue)
 
         # 라벨 텍스트
-        self.screen.blit(self.score_surface, (365, 20, 50, 50)) # Score 텍스트
+        self.screen.blit(self.score_surface, (365, 20, 50, 50)) # Score 텍스트 #screen.blit(그릴 이미지 객체, dest, area) 여기서 dest, 위치는 x,y값만 받음 bilt은 source의 크기를 그대로 가져오기 때문에 원래 크기 그대로 가져옴. 즉 뒤에 50 50은 의미가 없다.
         self.screen.blit(self.next_surface, (375, 180, 50, 50)) # Next 텍스트
 
         # 게임오버 텍스트 

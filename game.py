@@ -1,3 +1,4 @@
+from audio import Audio
 from grid import Grid
 from blocks import *
 import random
@@ -15,6 +16,7 @@ class Game: # 게임 로직 담당 클래스
         self.next_block = self.get_random_block() # 다음 블록 랜덤 선택
         self.game_over = False
         self.score = 0
+        self.audio = Audio()
 
     def update_score(self, lines_cleared, move_down_points): # 점수 업데이트, lines_cleared는 한 번에 제거된 줄 수, move_down_points는 블록이 아래로 이동할 때마다 추가되는 점수
         if lines_cleared == 1: # 한 줄 제거 시 100점
@@ -56,8 +58,18 @@ class Game: # 게임 로직 담당 클래스
         rows_cleared = self.grid.clear_full_rows()
         if rows_cleared > 0:
             self.update_score(rows_cleared, 0)
+            self.audio.play_clear()
         if self.block_fits() == False:
             self.game_over = True
+    
+    def hard_drop(self):
+        while True:
+            self.current_block.move(1, 0)
+            if self.block_inside() == False or self.block_fits() == False:
+                self.current_block.move(-1, 0)
+                self.lock_block()
+                break
+        
 
     def reset(self):
         self.grid.reset()

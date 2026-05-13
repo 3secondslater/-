@@ -13,4 +13,7 @@ class Colors:
 
     @classmethod
     def get_cell_colors(cls):
-        return [cls.dark_grey, cls.green, cls.red, cls.orange, cls.yellow, cls.purple, cls.cyan, cls.blue]
+        return [cls.dark_grey, cls.green, cls.red, cls.orange, cls.yellow, cls.purple, cls.cyan, cls.blue] 
+    #@classmethode ㄴ데코레이터는 함수의 기능을 추가하는 역할이다. get_cell_colors(cls): 에서cls 는 클래스 자기 자신을 뜻함 즉 여기서는 Colors가 되겠지
+
+   
