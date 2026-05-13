@@ -22,7 +22,7 @@ python main.py
 | ← → | 좌우 이동 |
 | ↓ | 빠른 낙하 |
 | ↑ | 회전 |
-| space | 즉시 낙하 |
+| SPACE | 즉시 낙하 |
 | ESC | 일시정지 / 재개 |
 | 마우스 좌클릭 | 시작 화면에서 START 버튼 |
 
@@ -40,7 +40,7 @@ python main.py
 | `position.py` | (row, column) 좌표 객체 |
 | `ui.py` | 창, 폰트, 점수판, 메뉴, 일시정지 오버레이 |
 | `colors.py` | 색상 팔레트 |
-| 'audio.py | 배경음, 효과음 사운드 |
+| `audio.py` | 배경음, 효과음 사운드 |
 
 ## 설계 포인트
 
