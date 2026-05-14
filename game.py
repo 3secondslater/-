@@ -16,8 +16,7 @@ class Game: # 게임 로직 담당 클래스
         self.next_block = self.get_random_block() # 다음 블록 랜덤 선택
         self.game_over = False
         self.score = 0
-        self.audio = Audio()
-
+        self.audio = Audio() # 사운드 시스템 초기화 
     def update_score(self, lines_cleared, move_down_points): # 점수 업데이트, lines_cleared는 한 번에 제거된 줄 수, move_down_points는 블록이 아래로 이동할 때마다 추가되는 점수
         if lines_cleared == 1: # 한 줄 제거 시 100점
             self.score += 100 
@@ -27,10 +26,11 @@ class Game: # 게임 로직 담당 클래스
             self.score += 500
         elif lines_cleared == 4: # 네 줄 제거 시 800점
             self.score += 800
-
+        
+    
 
     def get_random_block(self): # 랜덤 블록 선택 (순수 랜덤 — 같은 블록이 연속으로 나올 수 있음)
-        block_class = random.choice(BLOCK_CLASSES) # 7개 클래스 중 하나 선택
+        block_class = random.choice(BLOCK_CLASSES) # 7개 클래스 중 하나 선택 #random 함수는 MT19937 알고리즘 사용 2^19937 - 1이라는 메르센 소수를 이용하여 [0.0~1.0) 실수 반환 #choice 함수는 len()길이를 읽은 후 0~n-1 중 무작위 정수를 생성 후 그 인덱스로 리스트에 접근해 값 반환
         return block_class() # 매번 새 인스턴스 생성 (current/next가 같은 객체가 되는 걸 방지)
 
     def move_left(self):

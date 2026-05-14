@@ -1,15 +1,23 @@
 import pygame
 from colors import Colors
 
+WIDTH=500
+HEIGHT=620
+CENTER_X = WIDTH//2
+ALPHA =180
+FONT_NAME = "malgun gothic"
+FONT_SIZE_TITLE = 30
+FONT_SIZE_MENU_TITLE = 80
+FONT_SIZE_MENU_BUTTON = 40
 
 class UI:
     def __init__(self):
         # 창 설정
-        self.screen = pygame.display.set_mode((500, 620))  # 게임 창 크기 설정 # 앞에  self.를 넣는 이유는 나중에 만들어진 객체를 또 사용하기 위함, 인스턴스에 보관  아래 동일
+        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))  # 게임 창 크기 설정 # 앞에  self.를 넣는 이유는 나중에 만들어진 객체를 또 사용하기 위함, 인스턴스에 보관  아래 동일
         pygame.display.set_caption("Python Tetris")  # 창 제목 설정 # set_caption 은 두개의 인자를 받을 수 있다. (긴 제목, 짧은 제목/아이콘 제목) 여기서는 하나만 사용하였음.
 
         # 폰트맑은고딕 폰트, 크기 30
-        self.title_font = pygame.font.SysFont("malgun gothic", 30, bold=True) 
+        self.title_font = pygame.font.SysFont(FONT_NAME, FONT_SIZE_TITLE, bold=True) 
         # 변하지 않는 텍스트는 미리 렌더링하여 surface로 저장 (매 프레임 다시 만들 필요 없음)
         self.score_surface = self.title_font.render("Score", True, Colors.white) #Colors.white 값 읽고, 문자열Score 준비, 안티엘리어싱 true 값 준비, self.title_font 객체 찾기 찾은 값들을 모두 호출 render함수 작동해서 surface 객체를 반환. 반환된 serface를 저장.
         self.next_surface = self.title_font.render("Next", True, Colors.white)
@@ -20,16 +28,16 @@ class UI:
         self.next_rect = pygame.Rect(320, 215, 170, 180)
 
         # 메뉴 화면 요소
-        self.menu_title_font = pygame.font.SysFont("malgun gothic", 80, bold=True)  # 큰 제목용
-        self.menu_button_font = pygame.font.SysFont("malgun gothic", 40, bold=True)  # 버튼 글자용
+        self.menu_title_font = pygame.font.SysFont(FONT_NAME, FONT_SIZE_MENU_TITLE, bold=True)  # 큰 제목용
+        self.menu_button_font = pygame.font.SysFont(FONT_NAME, FONT_SIZE_MENU_BUTTON, bold=True)  # 버튼 글자용
         self.title_surface = self.menu_title_font.render("TETRIS", True, Colors.white)
         self.start_button_text = self.menu_button_font.render("START", True, Colors.white)
         self.start_button_rect = pygame.Rect(150, 350, 200, 80)  # 화면 중앙에 200x80 버튼
 
         # 일시정지 오버레이 (반투명 검은 배경 + "PAUSED" 텍스트)
         self.pause_text_surface = self.menu_title_font.render("PAUSED", True, Colors.white)
-        self.pause_overlay = pygame.Surface((500, 620))  # 화면 전체 크기의 빈 surface
-        self.pause_overlay.set_alpha(180)  # 0(투명)~255(불투명) 중 180 = 어둡게 흐림 처리
+        self.pause_overlay = pygame.Surface((WIDTH, HEIGHT))  # 화면 전체 크기의 빈 surface
+        self.pause_overlay.set_alpha(ALPHA)  # 0(투명)~255(불투명) 중 180 = 어둡게 흐림 처리
         self.pause_overlay.fill((0, 0, 0))  # 검은색으로 채움
 
     def draw_menu(self):
@@ -37,7 +45,7 @@ class UI:
         self.screen.fill(Colors.dark_blue)
 
         # 타이틀
-        title_rect = self.title_surface.get_rect(center=(250, 200))
+        title_rect = self.title_surface.get_rect(center=(CENTER_X, 200))
         self.screen.blit(self.title_surface, title_rect)
 
         # 1 시작버튼
